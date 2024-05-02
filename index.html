@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spend Wise</title>
+    <link rel="stylesheet" href="./style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+</head>
+
+<body>
+
+    <div ng-app="myApp" ng-controller="myControl">
+        <div class="loader-outter" ng-show="loader">
+            <div class="loader"></div>
+        </div>
+        <div class="css1">
+            <h1 class="cssTitle">Spend Wise</h1>
+            <div class="css2">
+                <h2 class="cssSubTitle">Bills</h2>
+                <div class="cssList" ng-repeat="item in data | filter : 'bill'">
+                    <p>{{item.name}}</p>
+                    <ion-icon ng-show="item.used < item.budget" style="color:red;width: 20px;height: 20px"
+                        name="close-circle"></ion-icon>
+                    <ion-icon ng-show="item.used === item.budget" style="color:green;width: 20px;height: 20px"
+                        name="checkmark-circle"></ion-icon>
+                </div>
+            </div>
+            <div class="css2">
+                <h2 class="cssSubTitle">Expenses</h2>
+                <div class="cssList" ng-repeat="item in data | filter : 'variable'">
+                    <p>{{item.name}}</p>
+                    <p ng-class="{'red' : item.used > item.budget, 'darkgreen' : item.used < item.budget}"
+                        class="cssValue">{{item.used}} / {{item.budget}}</p>
+                </div>
+            </div>
+            <div class="css2">
+                <h2 class="cssSubTitle">Investment</h2>
+                <div class="cssList" ng-repeat="item in data | filter : 'investment'">
+                    <p>{{item.name}}</p>
+                    <p ng-class="{'red' : item.used > item.budget, 'darkgreen' : item.used < item.budget}"
+                        class="cssValue">{{item.used}} / {{item.budget}}</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="./app.js"></script>
+</body>
+
+</html>
